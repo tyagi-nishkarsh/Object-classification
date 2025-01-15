@@ -3,17 +3,18 @@ from transformers import pipeline
 from PIL import Image, ImageDraw, ImageFont
 import scipy.io.wavfile as wavfile
 import tempfile
+from gtts import gTTS
+
 
 # Initialize pipelines
 narrator = pipeline("text-to-speech", model="kakao-enterprise/vits-ljs")
 object_detector = pipeline("object-detection", model="facebook/detr-resnet-50")
 
-
 def generate_audio(text):
     """Generate audio from text."""
-    narrated_text = narrator(text)
-    temp_audio_file = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
-    wavfile.write(temp_audio_file.name, rate=narrated_text["sampling_rate"], data=narrated_text["audio"][0])
+    tts = gTTS(text)
+    temp_audio_file = tempfile.NamedTemporaryFile(suffix=".mp3", delete=False)
+    tts.save(temp_audio_file.name)
     return temp_audio_file.name
 
 
