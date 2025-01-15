@@ -4,3 +4,4 @@ torch
 Pillow
 scipy
 timm
+phonemizer
