@@ -5,4 +5,4 @@ Pillow
 scipy
 timm
 phonemizer
-espeak
+gTTS
